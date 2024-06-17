@@ -1,0 +1,16 @@
+Ligação do MongoDB com o Electron
+
+1º Passo: Ter um servidor de banco de dados com o ELECTRON
+    - localhost (instalado com o windows) (desenvolvimento)
+    - físico (baseado no linux) em uma rede local (switch)
+    - nuvem (atlas (free 540Mb AWS)) (back-end (netflix, e-commerce))
+
+2º Passo: Instalar o mongoose (framework para usar o MongoDB)
+
+3º Passo: Criar um arquivo database na raiz e configurar a conexão com o database
+
+4º Passo: Importar no main os métodos para conexão/desconexão do db
+
+5º Passo: Na janela principal, tornar o objeto win público (gerenciar o db)
+
+6º Passo: Criar uma função para verificar status de conexão (criar após última linha do main)
