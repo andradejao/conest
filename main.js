@@ -40,6 +40,61 @@ const aboutWindow = () => {
     })
 }
 
+let clientes // Resolver bug de abrir várias janelas
+// Se a janela clientes não estiver aberta(Bug1)
+const clientesWindow = () => {
+    if (!clientes) {
+        clientes = new BrowserWindow({
+            width: 800,
+            height: 600,
+            icon: './src/public/img/.png',
+            resizable: false, // evitar o redimensionamento
+            autoHideMenuBar: true, // esconder menu
+        })
+    }
+    clientes.loadFile('./src/views/clientes.html')
+    // Reabrir a janela se estiver fechada (Bug1)
+    clientes.on('closed', () => {
+        clientes = null
+    })
+}
+
+let fornecedores
+const fornecedoresWindow = () => {
+    if (!fornecedores) {
+        fornecedores = new BrowserWindow({
+            width: 800,
+            height: 600,
+            icon: './src/public/img/.png',
+            resizable: false, // evitar o redimensionamento
+            autoHideMenuBar: true, // esconder menu
+        })
+    }
+    fornecedores.loadFile('./src/views/fornecedores.html')
+    // Reabrir a janela se estiver fechada (Bug1)
+    fornecedores.on('closed', () => {
+        fornecedores = null
+    })
+}
+
+let produtos
+const produtosWindow = () => {
+    if (!produtos) {
+        produtos = new BrowserWindow({
+            width: 800,
+            height: 600,
+            icon: './src/public/img/.png',
+            resizable: false, // evitar o redimensionamento
+            autoHideMenuBar: true, // esconder menu
+        })
+    }
+    produtos.loadFile('./src/views/produtos.html')
+    // Reabrir a janela se estiver fechada (Bug1)
+    produtos.on('closed', () => {
+        produtos = null
+    })
+}
+
 // Inicialização da aplicação
 app.whenReady().then(() => {
 
@@ -74,9 +129,52 @@ const template = [
         label: 'Arquivo',
         submenu: [
             {
+                label: 'Clientes',
+                click: () => clientesWindow()
+            },
+            {
+                label: 'Fornecedores',
+                click: () => fornecedoresWindow()
+            },
+            {
+                label: 'Produtos',
+                click: () => produtosWindow()
+            },
+            {
+                type: 'separator',
+            },
+            {
                 label: 'Sair',
                 click: () => app.quit(),
                 accelerator: 'Alt+F4'
+            },
+        ]
+    },
+    {
+        label: 'Exibir',
+        submenu: [
+            {
+                label: 'Recarregar',
+                role: 'reload'
+            },
+            {
+                label: 'Ferramentas de Desenvolvedor',
+                role: 'toggleDevTools',
+            },
+            {
+                type: 'separator',
+            },
+            {
+                label: 'Aplicar Zoom',
+                role: 'zoomIn'
+            },
+            {
+                label: 'Reduzir Zoom',
+                role: 'zoomOut',
+            },
+            {
+                label: 'Restaurar Zoom',
+                role: 'resetZoom',
             }
         ]
     },
@@ -91,6 +189,19 @@ const template = [
         ]
     },
 ]
+
+ipcMain.on('open-clientes', () => {
+    clientesWindow()
+})
+
+ipcMain.on('open-fornecedores', () => {
+    fornecedoresWindow()
+})
+
+ipcMain.on('open-produtos', () => {
+    produtosWindow()
+})
+
 // ---------------------------------------
 
 // Função que verifica o status da conexão
@@ -102,3 +213,4 @@ const statusConexao = async () => {
         win.webContents.send('db-status', `Erro de conexão: ${error.message}`)
     }
 }
+
