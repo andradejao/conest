@@ -21,78 +21,69 @@ const createWindow = () => {
 }
 
 // Janela Sobre
-let about // Resolver bug de abrir várias janelas
-// Se a janela about não estiver aberta(Bug1)
 const aboutWindow = () => {
-    if (!about) {
-        about = new BrowserWindow({
+    const father = BrowserWindow.getFocusedWindow()
+    if (father) {
+        const about = new BrowserWindow({
             width: 360, // largura
             height: 260, // altura
             icon: './src/public/img/about.png',
             resizable: false, // evitar o redimensionamento
+            minimizable: false,
             autoHideMenuBar: true, // esconder menu
+            parent: father, // estabelece a relação parent
+            modal: true,
         })
+        about.loadFile('./src/views/sobre.html')
     }
-    about.loadFile('./src/views/sobre.html')
-    // Reabrir a janela se estiver fechada (Bug1)
-    about.on('closed', () => {
-        about = null
-    })
 }
 
-let clientes // Resolver bug de abrir várias janelas
-// Se a janela clientes não estiver aberta(Bug1)
 const clientesWindow = () => {
-    if (!clientes) {
-        clientes = new BrowserWindow({
+    const father = BrowserWindow.getFocusedWindow()
+    if (father) {
+        const clientes = new BrowserWindow({
             width: 800,
             height: 600,
             icon: './src/public/img/.png',
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
+            parent: father,
+            modal: true
         })
+        clientes.loadFile('./src/views/clientes.html')
     }
-    clientes.loadFile('./src/views/clientes.html')
-    // Reabrir a janela se estiver fechada (Bug1)
-    clientes.on('closed', () => {
-        clientes = null
-    })
 }
 
-let fornecedores
 const fornecedoresWindow = () => {
-    if (!fornecedores) {
-        fornecedores = new BrowserWindow({
+    const father = BrowserWindow.getFocusedWindow()
+    if (father) {
+        const fornecedores = new BrowserWindow({
             width: 800,
             height: 600,
             icon: './src/public/img/.png',
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
+            parent: father,
+            modal: true
         })
+        fornecedores.loadFile('./src/views/fornecedores.html')
     }
-    fornecedores.loadFile('./src/views/fornecedores.html')
-    // Reabrir a janela se estiver fechada (Bug1)
-    fornecedores.on('closed', () => {
-        fornecedores = null
-    })
 }
 
-let produtos
 const produtosWindow = () => {
-    if (!produtos) {
-        produtos = new BrowserWindow({
+    const father = BrowserWindow.getFocusedWindow()
+    if (father) {
+       const produtos = new BrowserWindow({
             width: 800,
             height: 600,
             icon: './src/public/img/.png',
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
+            parent: father,
+            modal: true
         })
+        produtos.loadFile('./src/views/produtos.html')
     }
-    produtos.loadFile('./src/views/produtos.html')
-    // Reabrir a janela se estiver fechada (Bug1)
-    produtos.on('closed', () => {
-        produtos = null
-    })
 }
 
 // Inicialização da aplicação

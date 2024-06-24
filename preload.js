@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld('api', {
 ipcRenderer.send('send-message', "Status do database:")
 
 ipcRenderer.on('db-status', (event, status) => {
-    console.log(status) 
+    console.log(status)
 })
 
 // Inserir data na página
@@ -21,7 +21,7 @@ function obterData() {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
     }
     return data.toLocaleDateString('pt-br', options)
 }

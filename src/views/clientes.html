@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,52 @@
     <link rel="stylesheet" href="../public/css/style.css">
     <title>Clientes</title>
 </head>
+
 <body>
-    <h1>Clientes</h1>
+    <br>
+    <div class="container">
+        <h1>Clientes</h1>
+        <form class="row g-3" id="frmCliente">
+            <!-- Caixa de input usada na pesquisa do nome do cliente -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputSearch" maxlength="30" spellcheck="false">
+            </div>
+            <!-- Botão de pesquisa de cliente CRUD read -->
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" id="btnRead">Buscar</button>
+            </div>
+            <hr class="border border-primary border-1 opacity-75">
+            <!-- id MongoDB -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputId" placeholder="id">
+                <br>
+            </div>
+            <!-- Nome do cliente -->
+            <div class="col-md-8">
+                <label for="inputName" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="inputName" maxlength="50" spellcheck="false" required>
+            </div>
+            <!-- Telefone do cliente -->
+            <div class="col-md-4">
+                <label for="inputPhone" class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="inputPhone" maxlength="15" spellcheck="false" required>
+            </div>
+            <!-- Email do cliente -->
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="inputAddress" maxlength="50" spellcheck="false">
+                <br>
+            </div>
+            <!-- Botões -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-success" id="btnCreate">Adicionar</button>
+                <button type="button" class="btn btn-warning" id="btnUpdate">Editar</button>
+                <button type="button" class="btn btn-danger" id="btnDelete">Excluir</button>
+                <button type="reset" class="btn" id="btnReset"></button>
+            </div>
+        </form>
+    </div>
     <script src="../public/js/bootstrap.min.js"></script>
-    <script src="renderer.js"></script>
 </body>
+
 </html>
