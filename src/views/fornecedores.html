@@ -41,14 +41,15 @@
             <!-- Telefone do fornecedor -->
             <div class="col-md-4">
                 <label for="inputPhone" class="form-label">Telefone</label>
-                <input type="tel" class="form-control" id="inputPhone" maxlength="15" spellcheck="false" required>
+                <input type="number" class="form-control" id="inputPhone" spellcheck="false" required>
             </div>
             <!-- Email do fornecedor -->
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <label for="inputAddress" class="form-label">E-mail</label>
                 <input type="email" class="form-control" id="inputAddress" maxlength="50" spellcheck="false" required>
                 <br>
             </div>
+            <hr class="border border-primary border-1 opacity-75">
             <!-- CEP -->
             <div class="col-md-3">
                 <label for="inputCep" class="form-label">CEP</label>
@@ -56,7 +57,7 @@
             </div>
             <!-- Botão de pesquisa de CEP -->
             <div class="col-md-2">
-                <button type="button" class="btn btn-primary" id="btnCep">Buscar por CEP</button>
+                <button type="button" class="btn btn-primary" id="btnCep" onclick="buscarCep()">Buscar por CEP</button>
             </div>
             <!-- Logradouro -->
             <div class="col-md-6">
@@ -126,6 +127,7 @@
     </div>
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="renderer.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
