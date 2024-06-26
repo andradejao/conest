@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,124 @@
     <link rel="stylesheet" href="../public/css/style.css">
     <title>Fornecedores</title>
 </head>
+
 <body>
-    <h1>Fornecedores</h1>
+
+    <div class="container">
+        <h1>Fornecedores</h1>
+        <form class="row g-3" id="frmFornecedor">
+            <!-- Caixa de input usada na pesquisa do nome do fornecedor -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputSearch" maxlength="30" spellcheck="false">
+            </div>
+            <!-- Botão de pesquisa de fornecedor CRUD read -->
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" id="btnRead">Buscar</button>
+            </div>
+            <hr class="border border-primary border-1 opacity-75">
+            <!-- id MongoDB -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputId" placeholder="id">
+                <br>
+            </div>
+            <!-- Nome do fornecedor -->
+            <div class="col-md-8">
+                <label for="inputName" class="form-label">Razão Social</label>
+                <input type="text" class="form-control" id="inputName" maxlength="50" spellcheck="false" required>
+            </div>
+            <!-- CNPJ do fornecedor -->
+            <div class="col-md-4">
+                <label for="inputCnpj" class="form-label">CNPJ</label>
+                <input type="number" class="form-control" id="inputCnpj" spellcheck="false" required>
+            </div>
+            <!-- Telefone do fornecedor -->
+            <div class="col-md-4">
+                <label for="inputPhone" class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="inputPhone" maxlength="15" spellcheck="false" required>
+            </div>
+            <!-- Email do fornecedor -->
+            <div class="col-md-7">
+                <label for="inputAddress" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="inputAddress" maxlength="50" spellcheck="false" required>
+                <br>
+            </div>
+            <!-- CEP -->
+            <div class="col-md-3">
+                <label for="inputCep" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="inputCep" maxlength="8" spellcheck="false" required>
+            </div>
+            <!-- Botão de pesquisa de CEP -->
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" id="btnCep">Buscar por CEP</button>
+            </div>
+            <!-- Logradouro -->
+            <div class="col-md-6">
+                <label for="inputLogradouro" class="form-label">Logradouro</label>
+                <input type="text" class="form-control" id="inputLogradouro" maxlength="50" spellcheck="false" required>
+            </div>
+            <!-- Número -->
+            <div class="col-md-1">
+                <label for="inputNumero" class="form-label">Número</label>
+                <input type="number" class="form-control" id="inputNumero" spellcheck="false" required>
+            </div>
+            <!-- Bairro -->
+            <div class="col-md-5">
+                <label for="inputBairro" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="inputBairro" spellcheck="false" required>
+            </div>
+            <!-- Cidade -->
+            <div class="col-md-3">
+                <label for="inputCidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="inputCidade" spellcheck="false" required>
+            </div>
+            <div class="col-md-1">
+                <label>UF</label>
+                <select class="form-select">
+                    <option value="1">AC</option>
+                    <option value="2">AL</option>
+                    <option value="3">AP</option>
+                    <option value="4">AM</option>
+                    <option value="5">BA</option>
+                    <option value="6">CE</option>
+                    <option value="7">DF</option>
+                    <option value="8">ES</option>
+                    <option value="9">GO</option>
+                    <option value="10">MA</option>
+                    <option value="11">MT</option>
+                    <option value="12">MS</option>
+                    <option value="13">MG</option>
+                    <option value="14">PA</option>
+                    <option value="15">PB</option>
+                    <option value="16">PR</option>
+                    <option value="17">PE</option>
+                    <option value="18">PI</option>
+                    <option value="19">RJ</option>
+                    <option value="20">RN</option>
+                    <option value="21">RS</option>
+                    <option value="22">RO</option>
+                    <option value="23">RR</option>
+                    <option value="24">SC</option>
+                    <option value="25">SP</option>
+                    <option value="26">SE</option>
+                    <option value="27">TO</option>
+                </select>
+            </div>
+            <!-- Complemento -->
+            <div class="col-md-3">
+                <label for="inputComplemento" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="inputComplemento" spellcheck="false">
+            </div>
+            <!-- Botões -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-success" id="btnCreate">Adicionar</button>
+                <button type="button" class="btn btn-warning" id="btnUpdate">Editar</button>
+                <button type="button" class="btn btn-danger" id="btnDelete">Excluir</button>
+                <button type="reset" class="btn" id="btnReset"></button>
+            </div>
+        </form>
+    </div>
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="renderer.js"></script>
 </body>
+
 </html>

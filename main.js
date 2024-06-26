@@ -8,8 +8,8 @@ const { conectar, desconectar } = require('./database.js')
 let win
 const createWindow = () => {
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1280,
+        height: 720,
         icon: './src/public/img/iconhome.png',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
@@ -42,9 +42,9 @@ const clientesWindow = () => {
     const father = BrowserWindow.getFocusedWindow()
     if (father) {
         const clientes = new BrowserWindow({
-            width: 800,
-            height: 600,
-            icon: './src/public/img/.png',
+            width: 1280,
+            height: 720,
+            icon: './src/public/img/client.png',
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
             parent: father,
@@ -58,9 +58,9 @@ const fornecedoresWindow = () => {
     const father = BrowserWindow.getFocusedWindow()
     if (father) {
         const fornecedores = new BrowserWindow({
-            width: 800,
-            height: 600,
-            icon: './src/public/img/.png',
+            width: 1280,
+            height: 720,
+            icon: './src/public/img/fornecedor.png',
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
             parent: father,
@@ -74,9 +74,9 @@ const produtosWindow = () => {
     const father = BrowserWindow.getFocusedWindow()
     if (father) {
        const produtos = new BrowserWindow({
-            width: 800,
-            height: 600,
-            icon: './src/public/img/.png',
+            width: 1280,
+            height: 720,
+            icon: './src/public/img/produto.png',
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
             parent: father,
