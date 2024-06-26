@@ -11,7 +11,6 @@ function buscarCep() {
             frmFornecedor.inputLogradouro.value = `${dados.logradouro}`
             frmFornecedor.inputBairro.value = `${dados.bairro}`
             frmFornecedor.inputCidade.value = `${dados.localidade}`
-            
             frmFornecedor.uf.value = `${dados.uf}`
         })
         .catch((error) => {
