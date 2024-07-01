@@ -10,3 +10,7 @@ function fornecedor() {
 function produto() {
     api.openProdutos()
 }
+
+function relatorio(){
+    api.openRelatorios()
+}

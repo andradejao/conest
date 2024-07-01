@@ -73,7 +73,7 @@ const fornecedoresWindow = () => {
 const produtosWindow = () => {
     const father = BrowserWindow.getFocusedWindow()
     if (father) {
-       const produtos = new BrowserWindow({
+        const produtos = new BrowserWindow({
             width: 1280,
             height: 720,
             icon: './src/public/img/produto.png',
@@ -83,6 +83,22 @@ const produtosWindow = () => {
             modal: true
         })
         produtos.loadFile('./src/views/produtos.html')
+    }
+}
+
+const relatoriosWindow = () => {
+    const father = BrowserWindow.getFocusedWindow()
+    if (father) {
+        const relatorios = new BrowserWindow({
+            width: 1280,
+            height: 720,
+            icon: './src/public/img/produto.png',
+            resizable: false, // evitar o redimensionamento
+            autoHideMenuBar: true, // esconder menu
+            parent: father,
+            modal: true
+        })
+        relatorios.loadFile('./src/views/relatorios.html')
     }
 }
 
@@ -169,6 +185,12 @@ const template = [
             }
         ]
     },
+
+    {
+        label: 'Relatórios',
+        click: () => relatoriosWindow()
+    },
+
     {
         label: 'Ajuda',
         submenu: [
@@ -191,6 +213,10 @@ ipcMain.on('open-fornecedores', () => {
 
 ipcMain.on('open-produtos', () => {
     produtosWindow()
+})
+
+ipcMain.on('open-relatorios', () => {
+    relatoriosWindow()
 })
 
 // ---------------------------------------

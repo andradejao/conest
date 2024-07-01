@@ -4,7 +4,8 @@ const { ipcRenderer, contextBridge } = require('electron')
 contextBridge.exposeInMainWorld('api', {
     openClientes: () => ipcRenderer.send('open-clientes'),
     openFornecedores: () => ipcRenderer.send('open-fornecedores'),
-    openProdutos: () => ipcRenderer.send('open-produtos')
+    openProdutos: () => ipcRenderer.send('open-produtos'),
+    openRelatorios: ()=> ipcRenderer.send('open-relatorios')
 })
 
 // Status de conexão (Verificação do database)

@@ -79,3 +79,15 @@ footer p {
 select {
     margin-top: 8px;
 }
+
+/* Imagem do produto */
+#imgProduct {
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    width: 260px;
+    height: 260px;
+    padding: 4px;
+    position: fixed;
+    right: 70px;
+    bottom: 70px;
+}

@@ -8,10 +8,55 @@
     <link rel="stylesheet" href="../public/css/style.css">
     <title>Produtos</title>
 </head>
-    <h1>Produtos</h1>
+
 <body>
+    <div class="container">
+        <h1 class="mt-3">Produtos</h1>
+        <br>
+        <form class="row g-3" id="frmProduto">
+            <!-- Leitura do código de barras -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="inputProduct" spellcheck="false">
+            </div>
+            <!-- Img do barcode -->
+            <div class="col-md-4">
+                <img src="../public/img/barcode.png" alt="BarCode" id="imgBarCode">
+            </div>
+            <hr class="border border-primary border-1 opacity-75">
+            <!-- Id do produto -->
+            <div class="col-md-6">
+                <label for="idProduct" class="form-label">ID</label>
+                <input type="text" class="form-control" id="idProduct" spellcheck="false">
+            </div>
+             <!-- Código de barras -->
+             <div class="col-md-6">
+                <label for="BarCode" class="form-label">Código de Barras</label>
+                <input type="text" class="form-control" id="BarCode" spellcheck="false">
+            </div>
+             <!-- Produto -->
+             <div class="col-md-7">
+                <label for="nameProduct" class="form-label">Produto</label>
+                <input type="text" class="form-control" id="nameProduct" maxlength="50" spellcheck="false">
+            </div>
+            <!-- Imagem do Produto -->
+            <div class="col-md-5">
+                <img src="../public/img/cadproduto.png" alt="Imagem Produto" id="imgProduct">
+            </div>
+            <!-- Upload da imagem do produto -->
+            <input type="file" id="uploadProduct">
+            <br>
+            <br>
+            <br>
+            <!-- Botões -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-success" id="btnCreate">Adicionar</button>
+                <button type="button" class="btn btn-warning" id="btnUpdate">Editar</button>
+                <button type="button" class="btn btn-danger" id="btnDelete">Excluir</button>
+                <button type="reset" class="btn" id="btnReset"></button>
+            </div>
+        </form>
+    </div>
     <script src="../public/js/bootstrap.min.js"></script>
-    <script src="renderer.js"></script>
 </body>
 
 </html>
