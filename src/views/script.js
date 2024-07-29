@@ -8,10 +8,10 @@ function buscarCep() {
             return response.json()
         })
         .then((dados) => { //manipular os dados obtidos
-            frmFornecedor.inputLogradouro.value = `${dados.logradouro}`
-            frmFornecedor.inputBairro.value = `${dados.bairro}`
-            frmFornecedor.inputCidade.value = `${dados.localidade}`
-            frmFornecedor.uf.value = `${dados.uf}`
+            frmFornecedor.inputLogradouro.value = dados.logradouro
+            frmFornecedor.inputBairro.value = dados.bairro
+            frmFornecedor.inputCidade.value = dados.localidade
+            frmFornecedor.uf.value = dados.uf
         })
         .catch((error) => {
             console.log(`Erro ao obter o endereço: ${error}`)

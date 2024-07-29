@@ -7,7 +7,7 @@
 const mongoose = require('mongoose')
 
 // Definição do database (compass)
-let url = "mongodb://admin:pti%402018@10.26.45.203:27017/?authSource=admin"
+let url = "mongodb+srv://admin:senac123@clusterconest.ehn5bpp.mongodb.net/"
 
 // Conectar
 const conectar = async () => {
