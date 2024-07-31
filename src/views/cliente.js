@@ -22,7 +22,7 @@ formCliente.addEventListener('submit', async (event) => {
         foneCli: foneCliente.value,
         emailCli: emailCliente.value
     }
-    
+    api.newClient(cliente)
 
     // Limpar os campos do form após o envio
     formCliente.reset()

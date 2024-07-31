@@ -50,7 +50,10 @@ const clientesWindow = () => {
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
             parent: father,
-            modal: true
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
         })
         clientes.loadFile('./src/views/clientes.html')
     }
@@ -66,7 +69,10 @@ const fornecedoresWindow = () => {
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
             parent: father,
-            modal: true
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
         })
         fornecedores.loadFile('./src/views/fornecedores.html')
     }
@@ -82,7 +88,10 @@ const produtosWindow = () => {
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
             parent: father,
-            modal: true
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
         })
         produtos.loadFile('./src/views/produtos.html')
     }
@@ -98,7 +107,10 @@ const relatoriosWindow = () => {
             resizable: false, // evitar o redimensionamento
             autoHideMenuBar: true, // esconder menu
             parent: father,
-            modal: true
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
         })
         relatorios.loadFile('./src/views/relatorios.html')
     }
@@ -107,11 +119,11 @@ const relatoriosWindow = () => {
 // Inicialização da aplicação
 app.whenReady().then(() => {
 
-    // Status de conexão com o db
-    ipcMain.on('send-message', (event, message) => {
-        console.log(`<<< ${message}`)
-        statusConexao()
-    })
+    // // Status de conexão com o db
+    // ipcMain.on('send-message', (event, message) => {
+    //     console.log(`<<< ${message}`)
+    //     statusConexao()
+    // })
 
     ipcMain.on('db-conect', async (event, message) => {
         await conectar()
@@ -229,6 +241,17 @@ ipcMain.on('open-relatorios', () => {
 // CRUD Create >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ipcMain.on('new-client', async (event, cliente) => {
     console.log(cliente) // teste
+    try {
+        // Extração dos dados do objeto
+        const novoCliente = new clienteModel({
+            nomeCliente: cliente.nomeCli,
+            foneCliente: cliente.foneCli,
+            emailCliente: cliente.emailCli
+        })
+        await novoCliente.save() //save() - mongoose
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 // ---------------------------------------
