@@ -14,3 +14,26 @@ Ligação do MongoDB com o Electron
 5º Passo: Na janela principal, tornar o objeto win público (gerenciar o db)
 
 6º Passo: Criar uma função para verificar status de conexão (criar após última linha do main)
+
+7º Passo:
+dentro do whenReady()
+executar a função statusConexao()
+ 
+8º Passo: IMPORTANTE
+dentro de app.whenReady()
+criar um metodo para desconectar o banco de dados quando a janela principal for fechada
+
+9º Passo: Usar preload.js e IPC (ipcRenderer e ipcMain) para criar uma regra que permita
+modificar o ícone do database
+
+10º Passo: Criação da pasta models
+
+11º Passo: 
+    - Criar o modelo para clientes
+Cliente.js (1a letra maíuscula)
+
+12º Passo:
+    - Importar o schema no main.js
+
+CRUD Create:
+    Seguir o material fornecido

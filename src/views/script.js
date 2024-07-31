@@ -1,6 +1,6 @@
 // Função responsável por automatizar o endereço pela busca do CEP através de API
 function buscarCep() {
-    let cep = (frmFornecedor.inputCep.value)
+    let cep = frmFornecedor.inputCep.value
     let urlAPI = `https://viacep.com.br/ws/${cep}/json/`
     // uso de promisse para recuperar os dados do webservices (API)
     fetch(urlAPI)

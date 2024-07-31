@@ -5,11 +5,14 @@ contextBridge.exposeInMainWorld('api', {
     openClientes: () => ipcRenderer.send('open-clientes'),
     openFornecedores: () => ipcRenderer.send('open-fornecedores'),
     openProdutos: () => ipcRenderer.send('open-produtos'),
-    openRelatorios: ()=> ipcRenderer.send('open-relatorios')
+    openRelatorios: () => ipcRenderer.send('open-relatorios'),
+    dbMessage: (message) => ipcRenderer.on('db-message', message)
 })
 
+ipcRenderer.send('db-conect')
+
 // Status de conexão (Verificação do database)
-ipcRenderer.send('send-message', "Status do database:")
+// ipcRenderer.send('send-message', "Status do database:")
 
 ipcRenderer.on('db-status', (event, status) => {
     console.log(status)

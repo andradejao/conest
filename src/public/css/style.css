@@ -1,7 +1,7 @@
 /* esconder o id do cliente */
-#inputId {
+/* #inputId {
     display: none;
-}
+} */
 
 /* Ocultar incrementar do input number */
 input[type=number]::-webkit-inner-spin-button,

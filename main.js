@@ -3,6 +3,8 @@ const { app, BrowserWindow, Menu } = require('electron/main')
 const path = require('node:path')
 // Importação do módulo de conexão
 const { conectar, desconectar } = require('./database.js')
+// Importação do Schema (model) das coleções(tables)
+const clienteModel = require('./src/models/Cliente.js')
 
 // Janela principal (Definir o objeto win como variável pública)
 let win
@@ -109,6 +111,11 @@ app.whenReady().then(() => {
     ipcMain.on('send-message', (event, message) => {
         console.log(`<<< ${message}`)
         statusConexao()
+    })
+
+    ipcMain.on('db-conect', async (event, message) => {
+        await conectar()
+        event.reply('db-message', "conectado")
     })
 
     // Desconectar do db ao encerrar a janela
