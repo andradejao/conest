@@ -226,6 +226,11 @@ ipcMain.on('open-relatorios', () => {
     relatoriosWindow()
 })
 
+// CRUD Create >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('new-client', async (event, cliente) => {
+    console.log(cliente) // teste
+})
+
 // ---------------------------------------
 
 // Função que verifica o status da conexão
