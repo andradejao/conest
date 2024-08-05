@@ -1,10 +1,14 @@
-const { ipcMain } = require('electron')
+const { ipcMain, dialog } = require('electron')
 const { app, BrowserWindow, Menu } = require('electron/main')
 const path = require('node:path')
 // Importação do módulo de conexão
-const { conectar, desconectar } = require('./database.js')
+const { dbStatus, desconectar } = require('./database.js')
 // Importação do Schema (model) das coleções(tables)
 const clienteModel = require('./src/models/Cliente.js')
+const fornecedorModel = require('./src/models/Fornecedor.js')
+
+// status db
+let dbCon = null
 
 // Janela principal (Definir o objeto win como variável pública)
 let win
@@ -126,13 +130,13 @@ app.whenReady().then(() => {
     // })
 
     ipcMain.on('db-conect', async (event, message) => {
-        await conectar()
+        dbCon = await dbStatus()
         event.reply('db-message', "conectado")
     })
 
     // Desconectar do db ao encerrar a janela
     app.on('before-quit', async () => {
-        await desconectar()
+        await desconectar(dbCon)
     })
 
     createWindow()
@@ -238,7 +242,9 @@ ipcMain.on('open-relatorios', () => {
     relatoriosWindow()
 })
 
-// CRUD Create >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD Create >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// CRUD cliente --------------------------------------
 ipcMain.on('new-client', async (event, cliente) => {
     console.log(cliente) // teste
     try {
@@ -249,20 +255,59 @@ ipcMain.on('new-client', async (event, cliente) => {
             emailCliente: cliente.emailCli
         })
         await novoCliente.save() //save() - mongoose
+        dialog.showMessageBox({
+            type: 'info',
+            title: "Aviso",
+            message: "Cliente cadastrado com sucesso",
+            buttons: ['Ok']
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+// ----------------------------------------------------------
+
+//  CRUD fornecedor -------------------------------------
+ipcMain.on('new-provider', async (event, fornecedor) => {
+    console.log(fornecedor) // teste
+    try {
+        // Extração dos dados do objeto
+        const novoFornecedor = new fornecedorModel({
+            nomeFornecedor: fornecedor.nomeForn,
+            cnpjFornecedor: fornecedor.cnpjForn,
+            foneFornecedor: fornecedor.foneForn,
+            emailFornecedor: fornecedor.emailForn,
+            cepFornecedor: fornecedor.cepForn,
+            logradouroFornecedor: fornecedor.logadouroForn,
+            numeroFornecedor: fornecedor.numeroForn,
+            bairroFornecedor: fornecedor.bairroForn,
+            cidadeFornecedor: fornecedor.cidadeForn,
+            ufFornecedor: fornecedor.ufForn,
+            complementoFornecedor: fornecedor.complementoForn
+        })
+        await novoFornecedor.save() //save() - mongoose
+        dialog.showMessageBox({
+            type: 'info',
+            title: "Aviso",
+            message: "Fornecedor cadastrado com sucesso",
+            buttons: ['Ok']
+        })
     } catch (error) {
         console.log(error)
     }
 })
 
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 // ---------------------------------------
 
-// Função que verifica o status da conexão
-const statusConexao = async () => {
-    try {
-        await conectar()
-        win.webContents.send('db-status', "Database conectado")
-    } catch (error) {
-        win.webContents.send('db-status', `Erro de conexão: ${error.message}`)
-    }
-}
+// // Função que verifica o status da conexão
+// const statusConexao = async () => {
+//     try {
+//         await conectar()
+//         win.webContents.send('db-status', "Database conectado")
+//     } catch (error) {
+//         win.webContents.send('db-status', `Erro de conexão: ${error.message}`)
+//     }
+// }
 

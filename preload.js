@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('api', {
     openRelatorios: () => ipcRenderer.send('open-relatorios'),
     dbMessage: (message) => ipcRenderer.on('db-message', message),
     newClient: (cliente) => ipcRenderer.send('new-client', cliente),
+    newProvider: (fornecedor)=> ipcRenderer.send('new-provider', fornecedor)
 })
 
 ipcRenderer.send('db-conect')
