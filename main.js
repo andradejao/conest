@@ -244,7 +244,7 @@ ipcMain.on('open-relatorios', () => {
 
 // CRUD Create >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-// CRUD cliente --------------------------------------
+// CRUD Create cliente --------------------------------------
 ipcMain.on('new-client', async (event, cliente) => {
     console.log(cliente) // teste
     try {
@@ -267,7 +267,7 @@ ipcMain.on('new-client', async (event, cliente) => {
 })
 // ----------------------------------------------------------
 
-//  CRUD fornecedor -------------------------------------
+//  CRUD Create fornecedor -------------------------------------
 ipcMain.on('new-provider', async (event, fornecedor) => {
     console.log(fornecedor) // teste
     try {
@@ -299,7 +299,27 @@ ipcMain.on('new-provider', async (event, fornecedor) => {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+// CRUD Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Aviso (Busca: Preenchimento do campo obrigatório)
+ipcMain.on('dialog-infoSearchDialog', (event) => {
+    dialog.showMessageBox({
+        type: 'warning',
+        title: 'Atenção!',
+        message: "Preencha o campo requisitado",
+        buttons: ['OK']
+    })
+    event.reply('focus-search')
+})
+
+// Recebimento do pedido de busca de um cliente pelo nome
+ipcMain.on('searchClient', async (event, nomeCliente) => {
+    console.log(nomeCliente)
+})
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 // ---------------------------------------
+
 
 // // Função que verifica o status da conexão
 // const statusConexao = async () => {
