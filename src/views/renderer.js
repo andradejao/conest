@@ -36,6 +36,5 @@ function obterData() {
     }
     return data.toLocaleDateString('pt-br', options)
 }
-
 // Interagir diretamente no DOM do doc HTML (index.html)
 document.getElementById('dataAtual').innerHTML = obterData()

@@ -12,6 +12,8 @@ contextBridge.exposeInMainWorld('api', {
     infoSearchDialog: () => ipcRenderer.send('dialog-infoSearchDialog'),
     focusSearch: (args) => ipcRenderer.on('focus-search', args),
     searchClient: (nomeCliente) => ipcRenderer.send('search-client', nomeCliente),
+    nameClient: (args) => ipcRenderer.on('name-client', args),
+    clearSearch: (args) => ipcRenderer.on('clear-search', args)
 })
 
 ipcRenderer.send('db-conect')

@@ -53,11 +53,9 @@ let arrayCliente = []
 // Função responsável por enviar ao main um pedido
 // de busca dos dados de um cliente pelo nome
 function buscarCliente() {
-    let nomeCliente = document.getElementById('inputSearch').value
-    let rs = nomeCliente.trim()
+    let nomeCliente = document.getElementById('inputSearch').value.trim()
     // validação (UX)
-    console.log(rs)
-    if (nomeCliente === "" || nomeCliente === null) {
+    if (nomeCliente === "") {
         // validar campo obrigatório
         api.infoSearchDialog()
     } else {
@@ -68,6 +66,23 @@ function buscarCliente() {
     api.focusSearch((args) => {
         document.getElementById('inputSearch').focus()
     })
+    // Setar o nome do cliente e habilitar o cadastramento
+    api.nameClient((args) => {
+        let setarNomeCliente = document.getElementById('inputSearch').value.trim()
+        document.getElementById('inputName').value = setarNomeCliente
+        document.getElementById('inputSearch').value = ""
+        btnCreate.disabled = false
+        btnUpdate.disabled = false
+        btnDelete.disabled = false
+        btnRead.disabled = true
+        document.getElementById('inputSearch').disabled = true
+        document.getElementById('inputName').focus()
+    })
+    api.clearSearch((args) => {
+        document.getElementById('inputSearch').value = ""
+        document.getElementById('inputSearch').focus()
+    })
+
 }
 
 
@@ -86,4 +101,6 @@ function resetForm() {
     btnCreate.disabled = true
     btnUpdate.disabled = true
     btnDelete.disabled = true
+    btnRead.disabled = false
+    document.getElementById('inputSearch').disabled = false
 }

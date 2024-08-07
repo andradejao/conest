@@ -304,7 +304,7 @@ ipcMain.on('new-provider', async (event, fornecedor) => {
 ipcMain.on('dialog-infoSearchDialog', (event) => {
     dialog.showMessageBox({
         type: 'warning',
-        title: 'Atenção!',
+        title: "Atenção!",
         message: "Preencha o campo requisitado",
         buttons: ['OK']
     })
@@ -312,8 +312,36 @@ ipcMain.on('dialog-infoSearchDialog', (event) => {
 })
 
 // Recebimento do pedido de busca de um cliente pelo nome
-ipcMain.on('searchClient', async (event, nomeCliente) => {
+ipcMain.on('search-client', async (event, nomeCliente) => {
     console.log(nomeCliente)
+    // Busca no database
+    try {
+        // find() método de busca
+        const dadosCliente = await clienteModel.find({ nomeCliente: new RegExp(nomeCliente, 'i') })
+        console.log(dadosCliente)
+        // UX - Se o cliente não estiver cadastrado, avisar o usuário e habilitar o cadastramento
+        if (dadosCliente.length === 0) {
+            dialog.showMessageBox({
+                type: 'info',
+                title: "Aviso!",
+                message: "Cliente não encontrado. \nDeseja cadastrá-lo?",
+                buttons: ['Sim', 'Não'],
+                defaultId: 0
+            }).then((result) => {
+                if (result.response === 0) {
+                    // setar o nome do cliente no campo e habilitar os botões
+                    event.reply('name-client')
+                } else {
+                    // limpar o campo de pesquisa
+                    event.reply('clear-search')
+                }
+            })
+        } else {
+            // Enviar os dados do cliente ao renderer
+        }
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
