@@ -1,5 +1,7 @@
 // Função responsável por automatizar o endereço pela busca do CEP através de API
-function buscarCep() {
+// ativar função com blur
+const input = document.getElementById('inputCep')
+input.addEventListener('blur', function(){
     let cep = frmFornecedor.inputCep.value
     let urlAPI = `https://viacep.com.br/ws/${cep}/json/`
     // uso de promisse para recuperar os dados do webservices (API)
@@ -16,7 +18,9 @@ function buscarCep() {
         .catch((error) => {
             console.log(`Erro ao obter o endereço: ${error}`)
         })
-    }
+    })
+
+
 
 // Determina valor máximo de caracteres para number
 const inputCnpj = document.getElementById('inputCnpj')
