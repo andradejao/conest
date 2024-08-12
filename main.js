@@ -261,6 +261,7 @@ ipcMain.on('new-client', async (event, cliente) => {
             message: "Cliente cadastrado com sucesso",
             buttons: ['Ok']
         })
+        event.reply('reset-form')
     } catch (error) {
         console.log(error)
     }

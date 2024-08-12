@@ -75,23 +75,23 @@ function buscarCliente() {
         document.getElementById('inputSearch').focus()
     })
     // Setar o nome do cliente e habilitar o cadastramento
-    api.nameClient((args) => {
+    api.nameClient(async (args) => {
         // Restaurar o comportamento padrão da tecla Enter
         removerTeclaEnter()
         let setarNomeCliente = document.getElementById('inputSearch').value.trim()
-        document.getElementById('inputName').value = setarNomeCliente
-        // Limpar os campos para um novo cadastro
-        document.getElementById('inputPhone').value = ""
-        document.getElementById('inputAddress').value = ""
-        document.getElementById('inputSearch').value = ""
-        document.getElementById('inputId').value = ""
-        // ---------------------------------------------
-        btnCreate.disabled = false
-        btnUpdate.disabled = true
-        btnDelete.disabled = true
-        btnRead.disabled = true
-        document.getElementById('inputSearch').disabled = true
-        document.getElementById('inputName').focus()
+        document.getElementById('inputName').value += setarNomeCliente
+            // Limpar os campos para um novo cadastro
+            document.getElementById('inputPhone').value = ""
+            document.getElementById('inputAddress').value = ""
+            document.getElementById('inputSearch').value = ""
+            document.getElementById('inputId').value = ""
+            // ---------------------------------------------
+            btnCreate.disabled = false
+            btnUpdate.disabled = true
+            btnDelete.disabled = true
+            btnRead.disabled = true
+            document.getElementById('inputSearch').disabled = true
+            document.getElementById('inputName').focus()
     })
     api.clearSearch((args) => {
         document.getElementById('inputSearch').value = ""
@@ -101,18 +101,19 @@ function buscarCliente() {
     api.dataClient((event, dadosCliente) => {
         arrayCliente = JSON.parse(dadosCliente)
         console.log(arrayCliente)
-    })
-    // Percorrer o array, extrair e setar os campos de input
-    arrayCliente.forEach((c) => {
-        document.getElementById('inputId').value = c._id
-        document.getElementById('inputName').value = c.nomeCliente,        
-        document.getElementById('inputPhone').value = c.foneCliente,        
-        document.getElementById('inputAddress').value = c.emailCliente
-        // limpar a caixa de busca (UX)
-        document.getElementById('inputSearch').value = ""
-        // ativar os botões update e delete
-        document.getElementById('btnUpdate').disabled = false
-        document.getElementById('btnDelete').disabled = false
+        // Percorrer o array, extrair e setar os campos de input
+        arrayCliente.forEach((c) => {
+            document.getElementById('inputId').value = c._id
+            document.getElementById('inputName').value = c.nomeCliente,
+                document.getElementById('inputPhone').value = c.foneCliente,
+                document.getElementById('inputAddress').value = c.emailCliente
+            // limpar a caixa de busca (UX)
+            document.getElementById('inputSearch').value = ""
+            document.getElementById('inputSearch').disabled = true
+            // ativar os botões update e delete
+            document.getElementById('btnUpdate').disabled = false
+            document.getElementById('btnDelete').disabled = false
+        })
     })
     arrayCliente = []
 }
@@ -126,15 +127,19 @@ function buscarCliente() {
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+api.resetForm((args) => {
+    resetForm()
+})
 
 // Reset do formulário
 function resetForm() {
-    document.getElementById('inputSearch').focus()
     document.getElementById('inputSearch').disabled = false
+    document.getElementById('inputName').value = ""
+    document.getElementById('inputSearch').focus()
     btnCreate.disabled = true
     btnDelete.disabled = true
     btnUpdate.disabled = true
     btnRead.disabled = false
-    removerTeclaEnter()
     arrayCliente = []
+    document.getElementById("frmCliente").addEventListener("keydown", teclaEnter)
 }
