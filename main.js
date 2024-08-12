@@ -305,7 +305,7 @@ ipcMain.on('dialog-infoSearchDialog', (event) => {
     dialog.showMessageBox({
         type: 'warning',
         title: "Atenção!",
-        message: "Preencha o campo requisitado",
+        message: "Preencha o campo de busca",
         buttons: ['OK']
     })
     event.reply('focus-search')
@@ -338,6 +338,7 @@ ipcMain.on('search-client', async (event, nomeCliente) => {
             })
         } else {
             // Enviar os dados do cliente ao renderer
+            event.reply('data-client', JSON.stringify(dadosCliente))
         }
     } catch (error) {
         console.log(error)
