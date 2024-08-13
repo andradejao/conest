@@ -1,7 +1,7 @@
 // Função responsável por automatizar o endereço pela busca do CEP através de API
 // ativar função com blur
 const input = document.getElementById('inputCep')
-input.addEventListener('blur', function(){
+input.addEventListener('blur', () => {
     let cep = frmFornecedor.inputCep.value
     let urlAPI = `https://viacep.com.br/ws/${cep}/json/`
     // uso de promisse para recuperar os dados do webservices (API)
@@ -18,7 +18,7 @@ input.addEventListener('blur', function(){
         .catch((error) => {
             console.log(`Erro ao obter o endereço: ${error}`)
         })
-    })
+})
 
 
 
