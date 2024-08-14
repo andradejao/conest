@@ -45,8 +45,6 @@ formFornecedor.addEventListener('submit', async (event) => {
     // Limpar os campos do form após o envio
     formFornecedor.reset()
 })
-
-
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

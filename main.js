@@ -301,6 +301,7 @@ ipcMain.on('new-provider', async (event, fornecedor) => {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD Read Cliente
 // Aviso (Busca: Preenchimento do campo obrigatório)
 ipcMain.on('dialog-infoSearchDialog', (event) => {
     dialog.showMessageBox({
@@ -345,19 +346,32 @@ ipcMain.on('search-client', async (event, nomeCliente) => {
         console.log(error)
     }
 })
-
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('update-client', async (event, cliente) => {
+    console.log(cliente)
+    try {
+        // Extração dos dados do objeto
+        const clienteEditado = await clienteModel.findByIdAndUpdate(
+            cliente.idCli, {
+            nomeCliente: cliente.nomeCli,
+            foneCliente: cliente.foneCli,
+            emailCliente: cliente.emailCli
+        },
+            {
+                new: true
+            }
+        )
+        dialog.showMessageBox({
+            type: 'info',
+            title: "Aviso",
+            message: "Cliente atualizado com sucesso",
+            buttons: ['Ok']
+        })
+        event.reply('reset-form')
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 // ---------------------------------------
-
-
-// // Função que verifica o status da conexão
-// const statusConexao = async () => {
-//     try {
-//         await conectar()
-//         win.webContents.send('db-status', "Database conectado")
-//     } catch (error) {
-//         win.webContents.send('db-status', `Erro de conexão: ${error.message}`)
-//     }
-// }
-

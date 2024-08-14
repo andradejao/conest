@@ -25,7 +25,7 @@
             <hr class="border border-primary border-1 opacity-75">
             <!-- id MongoDB -->
             <div class="col-md-6">
-                <input type="text" class="form-control" id="inputId" placeholder="id">
+                <input type="text" class="form-control" id="inputId">
                 <br>
             </div>
             <!-- Nome do cliente -->
@@ -47,7 +47,7 @@
             <!-- Botões -->
             <div class="col-12">
                 <button type="submit" class="btn btn-success" id="btnCreate">Adicionar</button>
-                <button type="button" class="btn btn-warning" id="btnUpdate">Editar</button>
+                <button type="button" class="btn btn-warning" id="btnUpdate" onclick="editarCliente()">Editar</button>
                 <button type="button" class="btn btn-danger" id="btnDelete">Excluir</button>
                 <button type="reset" class="btn" id="btnReset" onclick="resetForm()"></button>
             </div>
