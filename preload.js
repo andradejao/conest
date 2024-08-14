@@ -17,13 +17,13 @@ contextBridge.exposeInMainWorld('api', {
     dataClient: (dadosCliente) => ipcRenderer.on('data-client', dadosCliente),
     resetForm: (args) => ipcRenderer.on('reset-form', args),
     updateClient: (cliente) => ipcRenderer.send('update-client', cliente),
-    deleteClient: (idCli) => ipcRenderer.send('delete-client', idCli)
+    deleteClient: (idCli) => ipcRenderer.send('delete-client', idCli),
+    searchProvider: (nomeFornecedor) => ipcRenderer.send('search-provider', nomeFornecedor),
+    nameProvider: (args) => ipcRenderer.on('name-provider', args),
+    dataProvider: (dadosFornecedor) => ipcRenderer.on('data-provider', dadosFornecedor)
 })
 
 ipcRenderer.send('db-conect')
-
-// Status de conexão (Verificação do database)
-// ipcRenderer.send('send-message', "Status do database:")
 
 ipcRenderer.on('db-status', (event, status) => {
     console.log(status)

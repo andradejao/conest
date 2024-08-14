@@ -293,6 +293,7 @@ ipcMain.on('new-provider', async (event, fornecedor) => {
             message: "Fornecedor cadastrado com sucesso",
             buttons: ['Ok']
         })
+        event.reply('reset-form')
     } catch (error) {
         console.log(error)
     }
@@ -301,7 +302,6 @@ ipcMain.on('new-provider', async (event, fornecedor) => {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-// CRUD Read Cliente
 // Aviso (Busca: Preenchimento do campo obrigatório)
 ipcMain.on('dialog-infoSearchDialog', (event) => {
     dialog.showMessageBox({
@@ -312,7 +312,7 @@ ipcMain.on('dialog-infoSearchDialog', (event) => {
     })
     event.reply('focus-search')
 })
-
+// CRUD Read Cliente >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Recebimento do pedido de busca de um cliente pelo nome
 ipcMain.on('search-client', async (event, nomeCliente) => {
     console.log(nomeCliente)
@@ -347,6 +347,37 @@ ipcMain.on('search-client', async (event, nomeCliente) => {
     }
 })
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// CRUD Read Fornecedor
+ipcMain.on('search-provider', async (event, nomeFornecedor) => {
+    console.log(nomeFornecedor)
+    try {
+        // find() método de busca
+        const dadosFornecedor = await fornecedorModel.find({ nomeFornecedor: new RegExp(nomeFornecedor, 'i') })
+        console.log(dadosFornecedor)
+        if (dadosFornecedor.length === 0) {
+            dialog.showMessageBox({
+                type: 'info',
+                title: "Aviso!",
+                message: "Fornecedor não encontrado. \nDeseja cadastrá-lo?",
+                buttons: ['Sim', 'Não'],
+                defaultId: 0
+            }).then((result) => {
+                if (result.response === 0) {
+                    event.reply('name-provider')
+                } else {
+                    // limpar o campo de pesquisa
+                    event.reply('clear-search')
+                }
+            })
+        } else {
+            // Enviar os dados do cliente ao renderer
+            event.reply('data-provider', JSON.stringify(dadosFornecedor))
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 // CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
