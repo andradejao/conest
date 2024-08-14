@@ -20,7 +20,9 @@ contextBridge.exposeInMainWorld('api', {
     deleteClient: (idCli) => ipcRenderer.send('delete-client', idCli),
     searchProvider: (nomeFornecedor) => ipcRenderer.send('search-provider', nomeFornecedor),
     nameProvider: (args) => ipcRenderer.on('name-provider', args),
-    dataProvider: (dadosFornecedor) => ipcRenderer.on('data-provider', dadosFornecedor)
+    dataProvider: (dadosFornecedor) => ipcRenderer.on('data-provider', dadosFornecedor),
+    updateProvider: (fornecedor) => ipcRenderer.send('update-provider', fornecedor),
+    deleteProvider: (idForn) => ipcRenderer.send('delete-provider', idForn)
 })
 
 ipcRenderer.send('db-conect')
