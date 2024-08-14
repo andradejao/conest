@@ -81,18 +81,18 @@ function buscarCliente() {
         // removerTeclaEnter()
         let setarNomeCliente = document.getElementById('inputSearch').value.trim()
         document.getElementById('inputName').value += setarNomeCliente
-            // Limpar os campos para um novo cadastro
-            document.getElementById('inputPhone').value = ""
-            document.getElementById('inputAddress').value = ""
-            document.getElementById('inputSearch').value = ""
-            document.getElementById('inputId').value = ""
-            // ---------------------------------------------
-            btnCreate.disabled = false
-            btnUpdate.disabled = true
-            btnDelete.disabled = true
-            btnRead.disabled = true
-            document.getElementById('inputSearch').disabled = true
-            document.getElementById('inputName').focus()
+        // Limpar os campos para um novo cadastro
+        document.getElementById('inputPhone').value = ""
+        document.getElementById('inputAddress').value = ""
+        document.getElementById('inputSearch').value = ""
+        document.getElementById('inputId').value = ""
+        // ---------------------------------------------
+        btnCreate.disabled = false
+        btnUpdate.disabled = true
+        btnDelete.disabled = true
+        btnRead.disabled = true
+        document.getElementById('inputSearch').disabled = true
+        document.getElementById('inputName').focus()
     })
     api.clearSearch((args) => {
         document.getElementById('inputSearch').value = ""
@@ -105,9 +105,9 @@ function buscarCliente() {
         // Percorrer o array, extrair e setar os campos de input
         arrayCliente.forEach((c) => {
             document.getElementById('inputId').value = c._id
-            document.getElementById('inputName').value = c.nomeCliente,
-                document.getElementById('inputPhone').value = c.foneCliente,
-                document.getElementById('inputAddress').value = c.emailCliente
+            document.getElementById('inputName').value = c.nomeCliente
+            document.getElementById('inputPhone').value = c.foneCliente
+            document.getElementById('inputAddress').value = c.emailCliente
             // limpar a caixa de busca (UX)
             document.getElementById('inputSearch').value = ""
             document.getElementById('inputSearch').disabled = true
@@ -121,7 +121,7 @@ function buscarCliente() {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-function editarCliente(){
+function editarCliente() {
     const cliente = {
         idCli: idCliente.value,
         nomeCli: nomeCliente.value,
@@ -135,6 +135,12 @@ function editarCliente(){
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+function excluirCliente() {
+    let idCli = idCliente.value
+    console.log(idCli)
+    // Envio do id ao main.js
+    api.deleteClient(idCli)
+}
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // Reset do formulário
@@ -146,6 +152,9 @@ api.resetForm((args) => {
 function resetForm() {
     document.getElementById('inputSearch').disabled = false
     document.getElementById('inputName').value = ""
+    document.getElementById('inputPhone').value = ""
+    document.getElementById('inputAddress').value = ""
+    document.getElementById('inputId').value = ""
     document.getElementById('inputSearch').focus()
     btnCreate.disabled = true
     btnDelete.disabled = true

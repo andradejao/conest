@@ -347,7 +347,10 @@ ipcMain.on('search-client', async (event, nomeCliente) => {
     }
 })
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 // CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// CRUD Update Cliente
 ipcMain.on('update-client', async (event, cliente) => {
     console.log(cliente)
     try {
@@ -373,5 +376,38 @@ ipcMain.on('update-client', async (event, cliente) => {
         console.log(error)
     }
 })
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// CRUD Delete Cliente
+ipcMain.on('delete-client', (event, idCli) => {
+    console.log(idCli)
+    // Confirmação da ação antes de excluir
+    dialog.showMessageBox({
+        type: 'error',
+        title: "Atenção!",
+        message: "Deseja excluir este cliente? Essa é uma ação irreversível",
+        buttons: ['Sim', 'Não'],
+        defaultId: 0
+    }).then(async (result) => {
+        if (result.response === 0) {
+            try {
+                await clienteModel.findByIdAndDelete(idCli)
+                dialog.showMessageBox({
+                    type: 'info',
+                    title: "Aviso",
+                    message: "Cliente excluído com sucesso",
+                    buttons: ['Ok']
+                })
+                event.reply('reset-form')
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    })
+}
+)
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // ---------------------------------------
