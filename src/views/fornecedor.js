@@ -7,6 +7,7 @@
 
 // Captura dos valores de input do form
 let formFornecedor = document.getElementById('frmFornecedor')
+let idFornecedor = document.getElementById('inputId')
 let nomeFornecedor = document.getElementById('inputName')
 let cnpjFornecedor = document.getElementById('inputCnpj')
 let foneFornecedor = document.getElementById('inputPhone')
@@ -119,10 +120,34 @@ function buscarFornecedor() {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+function editarFornecedor() {
+    const fornecedor = {
+        idForn: idFornecedor.value,
+        nomeForn: nomeFornecedor.value,
+        cnpjForn: cnpjFornecedor.value,
+        foneForn: foneFornecedor.value,
+        emailForn: emailFornecedor.value,
+        cepForn: cepFornecedor.value,
+        logadouroForn: logradouroFornecedor.value,
+        numeroForn: numeroFornecedor.value,
+        bairroForn: bairroFornecedor.value,
+        cidadeForn: cidadeFornecedor.value,
+        ufForn: ufFornecedor.value,
+        complementoForn: complementoFornecedor.value
+    }
+    console.log(fornecedor)
+    // Enviar o objeto fornecedor ao main.js
+    api.updateProvider(fornecedor)
+}
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+function excluirFornecedor() {
+    let idForn = idFornecedor.value
+    console.log(idForn)
+    // Envio do id ao main.js
+    api.deleteProvider(idForn)
+}
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 api.resetForm((args) => {

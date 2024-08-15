@@ -407,12 +407,44 @@ ipcMain.on('update-client', async (event, cliente) => {
         console.log(error)
     }
 })
+
+// CRUD Update Fornecedor
+ipcMain.on('update-provider', async (event, fornecedor) => {
+    console.log(fornecedor)
+    try {
+        // Extração dos dados do objeto
+        const fornecedorEditado = await fornecedorModel.findByIdAndUpdate(
+            fornecedor.idForn, {
+            nomeFornecedor: fornecedor.nomeForn,
+            cnpjFornecedor: fornecedor.cnpjForn,
+            foneFornecedor: fornecedor.foneForn,
+            emailFornecedor: fornecedor.emailForn,
+            cepFornecedor: fornecedor.cepForn,
+            logradouroFornecedor: fornecedor.logadouroForn,
+            numeroFornecedor: fornecedor.numeroForn,
+            bairroFornecedor: fornecedor.bairroForn,
+            cidadeFornecedor: fornecedor.cidadeForn,
+            ufFornecedor: fornecedor.ufForn,
+            complementoFornecedor: fornecedor.complementoForn
+        },
+            {
+                new: true
+            }
+        )
+        dialog.showMessageBox({
+            type: 'info',
+            title: "Aviso",
+            message: "Fornecedor atualizado com sucesso",
+            buttons: ['Ok']
+        })
+        event.reply('reset-form')
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-//CRUD Update Fornecedor >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -435,6 +467,35 @@ ipcMain.on('delete-client', (event, idCli) => {
                     type: 'info',
                     title: "Aviso",
                     message: "Cliente excluído com sucesso",
+                    buttons: ['Ok']
+                })
+                event.reply('reset-form')
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    })
+}
+)
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// CRUD Delete Fornecedor >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('delete-provider', (event, idForn) => {
+    console.log(idForn)
+    // Confirmação da ação antes de excluir
+    dialog.showMessageBox({
+        type: 'error',
+        title: "Atenção!",
+        message: "Deseja excluir este fornecedor? Essa é uma ação irreversível",
+        buttons: ['Sim', 'Não'],
+        defaultId: 0
+    }).then(async (result) => {
+        if (result.response === 0) {
+            try {
+                await fornecedorModel.findByIdAndDelete(idForn)
+                dialog.showMessageBox({
+                    type: 'info',
+                    title: "Aviso",
+                    message: "Fornecedor excluído com sucesso",
                     buttons: ['Ok']
                 })
                 event.reply('reset-form')
