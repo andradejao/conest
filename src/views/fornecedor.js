@@ -3,6 +3,8 @@
  * fornecedores
  */
 
+
+
 // Mudar propriedades do documento ao iniciar (UX)
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('inputSearch').focus()
@@ -129,6 +131,28 @@ function buscarFornecedor() {
 
 // CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function editarFornecedor() {
+    const errorMessage = document.getElementById('errorMessage')
+ 
+    // Verifica se todos os campos obrigatórios estão preenchidos
+    if (nomeFornecedor.value.trim() === "" ||
+        foneFornecedor.value.trim() === "" ||
+        cnpjFornecedor.value.trim() === "" ||
+        emailFornecedor.value.trim() === "" ||
+        cepFornecedor.value.trim() === "" ||
+        logradouroFornecedor.value.trim() === "" ||
+        numeroFornecedor.value.trim() === "" ||
+        bairroFornecedor.value.trim() === "" ||
+        cidadeFornecedor.value.trim() === "" ||
+        ufFornecedor.value.trim() === "") {
+       
+        // Exibe a mensagem de erro
+        errorMessage.style.display = 'block'
+        return // Impede a continuação da função
+    }
+ 
+    // Esconde a mensagem de erro caso tudo esteja preenchido
+    errorMessage.style.display = 'none'
+
     const fornecedor = {
         idForn: idFornecedor.value,
         nomeForn: nomeFornecedor.value,
@@ -183,4 +207,5 @@ function resetForm() {
     btnUpdate.disabled = true
     btnRead.disabled = false
     arrayFornecedor = []
+    errorMessage.style.display = "none"
 }
