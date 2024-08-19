@@ -3,6 +3,14 @@
  * fornecedores
  */
 
+// Mudar propriedades do documento ao iniciar (UX)
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('inputSearch').focus()
+    btnCreate.disabled = true
+    btnUpdate.disabled = true
+    btnDelete.disabled = true
+})
+
 // CRUD Create >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Captura dos valores de input do form
