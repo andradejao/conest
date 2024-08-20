@@ -410,6 +410,24 @@ ipcMain.on('update-client', async (event, cliente) => {
 
 // CRUD Update Fornecedor
 ipcMain.on('update-provider', async (event, fornecedor) => {
+    if(fornecedor.nomeForn === "" ||
+    fornecedor.cnpjForn === "" ||
+    fornecedor.foneForn === "" ||
+    fornecedor.emailForn === "" ||
+    fornecedor.cepForn === "" ||
+    fornecedor.logadouroForn === "" ||
+    fornecedor.numeroForn === "" ||
+    fornecedor.bairroForn === "" ||
+    fornecedor.cidadeForn === "" ||
+    fornecedor.ufForn === ""
+    ){
+        dialog.showMessageBox({
+            type:'error',
+            title: "Atenção!",
+            message: "Preencha os campos vazios"
+        })
+        return
+    }
     console.log(fornecedor)
     try {
         // Extração dos dados do objeto
