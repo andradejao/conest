@@ -415,7 +415,7 @@ ipcMain.on('update-provider', async (event, fornecedor) => {
     fornecedor.foneForn === "" ||
     fornecedor.emailForn === "" ||
     fornecedor.cepForn === "" ||
-    fornecedor.logadouroForn === "" ||
+    fornecedor.logradouroForn === "" ||
     fornecedor.numeroForn === "" ||
     fornecedor.bairroForn === "" ||
     fornecedor.cidadeForn === "" ||
@@ -438,7 +438,7 @@ ipcMain.on('update-provider', async (event, fornecedor) => {
             foneFornecedor: fornecedor.foneForn,
             emailFornecedor: fornecedor.emailForn,
             cepFornecedor: fornecedor.cepForn,
-            logradouroFornecedor: fornecedor.logadouroForn,
+            logradouroFornecedor: fornecedor.logradouroForn,
             numeroFornecedor: fornecedor.numeroForn,
             bairroFornecedor: fornecedor.bairroForn,
             cidadeFornecedor: fornecedor.cidadeForn,

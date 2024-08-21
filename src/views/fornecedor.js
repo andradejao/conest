@@ -138,7 +138,7 @@ function editarFornecedor() {
         foneForn: foneFornecedor.value,
         emailForn: emailFornecedor.value,
         cepForn: cepFornecedor.value,
-        logadouroForn: logradouroFornecedor.value,
+        logradouroForn: logradouroFornecedor.value,
         numeroForn: numeroFornecedor.value,
         bairroForn: bairroFornecedor.value,
         cidadeForn: cidadeFornecedor.value,
